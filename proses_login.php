@@ -2,10 +2,11 @@
 session_start();
 include 'koneksi.php';
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = mysqli_real_escape_string($conn, $_POST['username']);
+$password = mysqli_real_escape_string($conn, $_POST['password']);
+$role     = mysqli_real_escape_string($conn, $_POST['role']);
 
-$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
+$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password' AND role='$role'");
 $cek = mysqli_num_rows($query);
 
 if ($cek > 0) {
@@ -15,11 +16,13 @@ if ($cek > 0) {
     $_SESSION['username'] = $data['username'];
     $_SESSION['nama']     = $data['nama'];
     $_SESSION['role']     = $data['role'];
+
     if ($data['role'] == "mahasiswa") {
-        header("location:index.php");
+        header("location:dashboard_mhs.php");
     } else if ($data['role'] == "petugas") {
-        header("location:index.php");
+        header("location:dashboard_petugas.php");
     }
+    exit();
 } else {
     header("location:login.php?pesan=gagal");
 }

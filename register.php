@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In — Foundly.</title>
+    <title>Join Foundly — Register</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -37,50 +37,14 @@
             background: rgba(255, 255, 255, 0.1); 
         }
 
-        nav {
-            padding: 12px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: auto;
-            top: 30px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 100px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .logo-link {
-            text-decoration: none;
-            color: #000;
-            font-weight: 800;
-            font-size: 18px;
-            letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-link::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #6366f1;
-            border-radius: 2px;
-        }
-
-        .login-container {
+        .register-container {
             width: 100%;
-            max-width: 460px;
+            max-width: 480px;
             padding: 20px;
-            z-index: 10;
+            perspective: 1000px;
         }
 
-        .login-card {
+        .register-card {
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
@@ -88,7 +52,6 @@
             border-radius: 40px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
-            text-align: center;
             animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
@@ -96,7 +59,8 @@
             font-size: 32px;
             font-weight: 800;
             letter-spacing: -1.5px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            text-align: center;
             color: #000;
         }
 
@@ -104,47 +68,19 @@
             color: rgba(0, 0, 0, 0.5);
             font-size: 15px;
             margin-bottom: 35px;
+            text-align: center;
             font-weight: 500;
-        }
-
-        .role-selector {
-            display: flex;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 6px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeInBlur 0.6s ease-out 0.3s forwards;
-        }
-
-        .role-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: transparent;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 15px;
-            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        .role-btn.active {
-            background: #fff;
-            color: #000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .form-group {
             margin-bottom: 22px;
-            text-align: left;
             opacity: 0;
             animation: fadeInBlur 0.6s ease-out forwards;
         }
 
-        .form-group:nth-child(3) { animation-delay: 0.4s; }
-        .form-group:nth-child(4) { animation-delay: 0.5s; }
+        .form-group:nth-child(1) { animation-delay: 0.3s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+        .form-group:nth-child(3) { animation-delay: 0.5s; }
 
         label {
             display: block;
@@ -167,6 +103,11 @@
             font-weight: 600;
             transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             outline: none;
+            color: #000;
+        }
+
+        input::placeholder {
+            color: rgba(0, 0, 0, 0.3);
         }
 
         input:focus {
@@ -176,7 +117,7 @@
             transform: translateY(-2px);
         }
 
-        .btn-submit {
+        .btn-register {
             width: 100%;
             background: #000;
             color: white;
@@ -192,29 +133,31 @@
             animation: fadeInBlur 0.6s ease-out 0.7s forwards;
         }
 
-        .btn-submit:hover {
+        .btn-register:hover {
             background: #333;
             transform: translateY(-3px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        .back-link {
-            display: inline-block;
+        .btn-register:active {
+            transform: translateY(-1px);
+        }
+
+        .login-link {
+            display: block;
+            text-align: center;
             margin-top: 30px;
             color: rgba(0, 0, 0, 0.4);
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
-            transition: 0.3s;
             opacity: 0;
             animation: fadeInBlur 0.6s ease-out 0.9s forwards;
         }
 
-        .back-link:hover { color: #000; }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .login-link span { 
+            color: #6366f1; 
+            font-weight: 700;
         }
 
         @keyframes cardEntrance {
@@ -228,54 +171,40 @@
         }
 
         @media (max-width: 480px) {
-            .login-card { padding: 40px 25px; }
-            nav { top: 20px; }
+            .register-card { padding: 40px 25px; border-radius: 30px; }
+            h2 { font-size: 28px; }
         }
     </style>
 </head>
 <body>
+    <div class="register-container">
+        <div class="register-card">
+            <h2>Create Account</h2>
+            <p class="subtitle">Daftar sekarang untuk mulai menggunakan Foundly.</p>
 
-    <nav>
-        <a href="index.php" class="logo-link">Foundly.</a>
-    </nav>
-
-    <div class="login-container">
-        <div class="login-card">
-            <h2>Welcome back</h2>
-            <p class="subtitle">Silakan pilih peran dan masukkan akun Anda.</p>
-
-            <form action="proses_login.php" method="POST">
-                <div class="role-selector">
-                    <button type="button" class="role-btn active" onclick="setRole('mahasiswa', this)">Mahasiswa</button>
-                    <button type="button" class="role-btn" onclick="setRole('petugas', this)">Petugas</button>
+            <form action="proses_register.php" method="POST">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" name="nama" placeholder="Masukkan nama lengkap..." required>
                 </div>
-                
-                <input type="hidden" name="role" id="selected-role" value="mahasiswa">
 
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" name="username" placeholder="Masukkan username..." required>
+                    <input type="text" name="username" placeholder="Buat username unik..." required>
                 </div>
 
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" placeholder="••••••••" required>
+                    <input type="password" name="password" placeholder="Minimal 6 karakter..." required>
                 </div>
 
-                <button type="submit" class="btn-submit">Sign In to Dashboard</button>
+                <input type="hidden" name="role" value="mahasiswa">
+
+                <button type="submit" class="btn-register">Daftar Sekarang</button>
             </form>
 
-            <a href="index.php" class="back-link">← Kembali ke beranda</a>
+            <a href="login.php" class="login-link">Sudah punya akun? <span>Login di sini</span></a>
         </div>
     </div>
-
-    <script>
-        function setRole(role, btn) {
-            document.getElementById('selected-role').value = role;
-            const buttons = document.querySelectorAll('.role-btn');
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
-    </script>
 </body>
 </html>
